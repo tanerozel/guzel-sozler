@@ -123,7 +123,7 @@ class HomeScreen extends React.Component {
               <Text h5> tanerozel47@gmail.com </Text>
               <Text h4 style={{ paddingTop: 5 }}> UI/UX </Text>
               <Text h5> Yusuf Çiftçi </Text>
-              <Text h5> yusufciftci@gmail.com </Text>
+              <Text h5> yusufciftci6@gmail.com </Text>
 
             </View>
             <TouchableHighlight
