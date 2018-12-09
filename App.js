@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import { Header, Icon, Text } from 'react-native-elements';
 
-
 import { Notifications, Permissions, AdMobBanner, Contacts } from 'expo';
 import { WordText, Loader, Textter } from './components/index';
 import * as firebase from 'firebase';
@@ -201,8 +200,6 @@ class HomeScreen extends React.Component {
           backgroundColor: '#fff'
         }}>
           {this._renderModal()}
-
-
           <View />
           <ScrollView>
             {this.props.data ? this._renderItemText() : this._renderLoading()}
@@ -210,11 +207,8 @@ class HomeScreen extends React.Component {
         </ScrollView>
         <View>
           <AdMobBanner
-
             bannerSize="fullBanner"
             adUnitID="ca-app-pub-0041375232450674/4679213555"
-            // Test ID, Replace with your-admob-unit-id
-            //testDeviceID="EMULATOR"
             didFailToReceiveAdWithError={this.bannerError}
           />
         </View>
@@ -227,9 +221,6 @@ class HomeScreen extends React.Component {
     );
   }
 }
-
-
-
 
 
 let initialRouteName = Math.floor(Math.random() * 7);
@@ -340,12 +331,6 @@ class AppRouter extends React.Component {
 }
 
 const App = () => {
-
-  NetInfo.isConnectionExpensive()
-  NetInfo.isConnected.fetch().then(isConnected => {
-    console.log(isConnected);
-  });
-
   return <AppRouter />;
 };
 
