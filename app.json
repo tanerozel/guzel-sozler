@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "Güzel Sözler",
+    "description": "Güzel Ve Anlamlı Sözler , Ünlü Sözleri , Aşk Sözler, Komik Sözler,Doğum Günü Sözler Damar Sözler, Kapak Sözler , Laf Sokucu Sözler, Instagram Durum Sözleri , Duygusal Whatsapp Sözleri , Düşündüren Kısa Sözler",
+    "slug": "guzelsozler",
+    "privacy": "public",
+    "sdkVersion": "31.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#fff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "bundleIdentifier": "com.incode.guzelsozler"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.incode.guzelsozler"
+    }
+  }
+}
