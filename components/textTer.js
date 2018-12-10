@@ -45,11 +45,11 @@ export class Textter extends React.Component {
         <View style={styles.container}>
           <View style={styles.textBox}>
             <Text
+              onPress={() => this._share()}
               key={this.props.keyTexter}
               onLongPress={() => this._copyText(this.props.text)}
               style={styles.text}
             >{this.props.text}</Text>
-
           </View>
           <View style={styles.socialBox}>
             <View style={{ paddingBottom: 10 }}>

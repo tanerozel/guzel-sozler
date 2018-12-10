@@ -8,9 +8,10 @@ import {
     Modal,
     Dimensions,
     CameraRoll,
-    Linking
+    Linking,
+    ImageBackground
 } from 'react-native';
-import { Font, takeSnapshotAsync, Permissions } from 'expo';
+import { Font, takeSnapshotAsync, Permissions, ImagePicker } from 'expo';
 import { Icon, Button } from 'react-native-elements';
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get(
     'window'
@@ -28,7 +29,9 @@ export class DetailModal extends React.Component {
             '#93c54a',
             '#ed658b',
             '#3dbbc7',
-        ]
+        ],
+        image: null,
+        textColor: '#fff'
     };
 
     constructor(props) {
@@ -48,6 +51,16 @@ export class DetailModal extends React.Component {
         }
 
     }
+    _pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            aspect: [4, 3],
+        });
+
+        if (!result.cancelled) {
+            this.setState({ image: result.uri });
+        }
+    };
 
     _shareText(text) {
         Share.share({
@@ -77,22 +90,43 @@ export class DetailModal extends React.Component {
             </TouchableOpacity>
         </View>
     }
+    _renderColorBox() {
+        return <Text style={styles.text}> {this.props.text}</Text>
+    }
+    _renderImageBox() {
+
+        return (
+            <ImageBackground
+                source={{ uri: this.state.image }}
+                style={{ flex: 1, justifyContent: 'center', width: '100%', height: '100%' }}>
+                <Text style={[styles.text, { shadowOffset: 4, shadowOpacity: 1, shadowColor: '#000', fontSize: 30, color: this.state.textColor }]}> {this.props.text}</Text>
+            </ImageBackground>
+        );
+    }
+
     _renderTextBox() {
+
         return (
             <View>
-                <View ref={view => {
-                    this._container = view;
-                }} style={[styles.textBox, { backgroundColor: this.state.currentColor }]}>
-                    <Text style={styles.text}> {this.props.text}</Text>
-
-                </View>
+                <TouchableOpacity onPress={() => this._pickImage()} >
+                    <View style={[styles.textBox, { backgroundColor: this.state.image == null ? this.state.currentColor : '' }]} ref={view => {
+                        this._container = view;
+                    }}>
+                        {this.state.image == null ? this._renderColorBox() : this._renderImageBox()}
+                    </View>
+                </TouchableOpacity>
                 <View style={{ height: 60, marginTop: 10 }}>
                     <View
+                        onPress={() => this._pickImage()}
                         style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
                         {this.state.colors.map(r => (
                             <TouchableOpacity
                                 onPress={() => {
                                     this.setState({ currentColor: r });
+                                    if (this.state.image != null) {
+                                        this.setState({ textColor: r });
+                                    }
+
                                 }}>
                                 <View
                                     style={{
@@ -124,7 +158,9 @@ export class DetailModal extends React.Component {
                             backgroundColor: "#f54740",
                             borderRadius: 30
                         }}
-                        onPress={() => this._shareText(this.props.text)}
+
+                    //onPress={() => this._shareText(this.props.text)}
+                    // onPress={() => this._pickImage()}
                     />
                 </View>
                 <View style={{ marginTop: 10 }}>
@@ -179,7 +215,7 @@ export class DetailModal extends React.Component {
 }
 
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
 
     textBox: {
         width: viewportWidth - 30,
@@ -194,12 +230,12 @@ const styles = StyleSheet.create({
     text: {
         fontFamily: 'poiretOne',
         fontSize: 25,
-        color: "#fff",
         textAlignVertical: 'center',
         lineHeight: 30,
         padding: 10,
         fontWeight: '300',
         textAlign: 'center',
+        color: '#fff'
     },
     closes: {
         height: 40,
