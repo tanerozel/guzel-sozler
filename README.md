@@ -10,3 +10,4 @@ Expo:https://expo.io/@tanerozel/guzelsozler
 ```sh 
 expo start
 ```
+![](captured.gif)
