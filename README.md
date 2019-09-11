@@ -4,7 +4,7 @@ Güzel Ve Anlamlı Sözler , Ünlü Sözleri , Aşk Sözler, Komik Sözler,Doğu
 Expo:https://expo.io/@tanerozel/guzelsozler
 
 ```sh 
-npm install 
+ yarn
 ```
 
 ```sh 
